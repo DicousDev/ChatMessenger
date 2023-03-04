@@ -1,0 +1,37 @@
+.chat-mensagem-box {
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 300px;
+  border-radius: 16px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.chat-mensagem-outro {
+  background-color: #97dc72;
+}
+
+.chat-mensagem-box-usuario {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-mensagem-usuario-suporte {
+  width: 40%;
+}
+
+.chat-mensagem-usuario {
+  width: 100%;
+  background-color: #5ab8ff;
+}
+
+.chat-mensagem-autor {
+  font-weight: bold;
+}
+
+.chat-mensagem {
+  padding-top: 5px;
+}
