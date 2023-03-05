@@ -20,6 +20,7 @@ public class ChatController {
   @MessageMapping("/mensagem/public")
   public void enviaMensagem(@Payload EnviaMensagemInput input) {
     enviaMensagemUseCase.enviarMensagem(input.getMensagem());
+    System.out.println("Enviando mensagem de volta!");
     template.convertAndSend("/chat/public", input.getMensagem());
   }
 }

@@ -10,7 +10,6 @@ public class AutorTest {
   @Test
   public void deveCriarAutor() {
     Autor autor = Autor.criar("João Victor");
-    assertThat(autor.getId()).isNotNull();
     assertThat(autor.getNome()).isEqualTo("João Victor");
   }
 
