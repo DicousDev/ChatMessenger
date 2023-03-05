@@ -11,8 +11,13 @@ public class Mensagem {
       throw new RuntimeException("Não é possível criar uma mensagem sem autor");
     }
 
-    if(mensagem == null || mensagem.trim().isEmpty()) {
-      throw new RuntimeException("Não é possível criar uma mensagem em null ou branco");
+    if(mensagem == null) {
+      throw new RuntimeException("Não é possível criar uma mensagem null");
+    }
+
+    mensagem = mensagem.trim();
+    if(mensagem.isEmpty()) {
+      throw new RuntimeException("Não é possível criar uma mensagem em branco");
     }
 
     this.autor = autor;

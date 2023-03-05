@@ -15,6 +15,18 @@ public class AutorTest {
   }
 
   @Test
+  public void deveCriarAutorComNomeComIniciasEmBranco() {
+    Autor autor = Autor.criar(" João");
+    assertThat(autor.getNome()).isEqualTo("João");
+  }
+
+  @Test
+  public void deveCriarAutorComNomeComFinaisEmBranco() {
+    Autor autor = Autor.criar("João ");
+    assertThat(autor.getNome()).isEqualTo("João");
+  }
+
+  @Test
   public void deveFalharQuandoCriarAutorComNomeNull() {
     Exception ex = assertThrows(RuntimeException.class, () -> {
       Autor.criar(null);
@@ -30,17 +42,5 @@ public class AutorTest {
     });
 
     assertThat(ex.getMessage()).isEqualTo("Não é possível criar um autor com nome em branco");
-  }
-
-  @Test
-  public void deveFalharQuandoCriarAutorComNomeComIniciasEmBranco() {
-    Autor autor = Autor.criar(" João");
-    assertThat(autor.getNome()).isEqualTo("João");
-  }
-
-  @Test
-  public void deveFalharQuandoCriarAutorComNomeComFinaisEmBranco() {
-    Autor autor = Autor.criar("João ");
-    assertThat(autor.getNome()).isEqualTo("João");
   }
 }

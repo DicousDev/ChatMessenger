@@ -30,7 +30,7 @@ public class MensagemTest {
       Mensagem.criar(autor, null);
     });
 
-    assertThat(ex.getMessage()).isEqualTo("Não é possível criar uma mensagem em null ou branco");
+    assertThat(ex.getMessage()).isEqualTo("Não é possível criar uma mensagem null");
   }
 
   @Test
@@ -40,6 +40,20 @@ public class MensagemTest {
       Mensagem.criar(autor, "  ");
     });
 
-    assertThat(ex.getMessage()).isEqualTo("Não é possível criar uma mensagem em null ou branco");
+    assertThat(ex.getMessage()).isEqualTo("Não é possível criar uma mensagem em branco");
+  }
+
+  @Test
+  public void deveCriarMensagemComIniciasEmBranco() {
+    Autor autor = Autor.criar("João");
+    Mensagem mensagem = Mensagem.criar(autor, " teste");
+    assertThat(mensagem.getMensagem()).isEqualTo("teste");
+  }
+
+  @Test
+  public void deveCriarMensagemComFinaisEmBranco() {
+    Autor autor = Autor.criar("João");
+    Mensagem mensagem = Mensagem.criar(autor, "teste ");
+    assertThat(mensagem.getMensagem()).isEqualTo("teste");
   }
 }
