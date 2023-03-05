@@ -15,4 +15,8 @@ public class ChatAdapter implements ChatDatabasePort {
   public void enviarMensagem(Mensagem mensagem) {
     mensagens.add(mensagem);
   }
+
+  public Integer getTotalMensagens() {
+    return mensagens.size();
+  }
 }
