@@ -10,7 +10,7 @@ public class MensagemTest {
   public void deveCriarMensagem() {
     Autor autor = Autor.criar("João");
     Mensagem mensagem = Mensagem.criar(autor, "olá teste");
-    assertThat(mensagem.getNomeAutor()).isEqualTo("João");
+    assertThat(mensagem.getAutor().getNome()).isEqualTo("João");
     assertThat(mensagem.getMensagem()).isEqualTo("olá teste");
   }
 

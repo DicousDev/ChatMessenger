@@ -33,12 +33,4 @@ public class Mensagem {
   public static Mensagem criar(Autor autor, String mensagem) {
     return new Mensagem(autor, mensagem);
   }
-
-  public String getNomeAutor() {
-    return autor.getNome();
-  }
-
-  public String getMensagem() {
-    return mensagem;
-  }
 }
