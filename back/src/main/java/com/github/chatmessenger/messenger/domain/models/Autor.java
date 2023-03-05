@@ -9,8 +9,13 @@ public class Autor {
 
   private Autor(String nome) {
 
-    if(nome == null || nome.isEmpty()) {
-      throw new RuntimeException("Não é possível criar um autor sem nome");
+    if(nome == null) {
+      throw new RuntimeException("Não é possível criar um autor com nome null");
+    }
+
+    nome = nome.trim();
+    if(nome.isEmpty()) {
+      throw new RuntimeException("Não é possível criar um autor com nome em branco");
     }
 
     this.id = UUID.randomUUID();
