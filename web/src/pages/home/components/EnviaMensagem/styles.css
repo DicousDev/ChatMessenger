@@ -13,7 +13,7 @@
 }
 
 .chat-envia-mensagem-botao-box {
-  width: 30%;
+  margin: 0 10px;
   display: flex;
   justify-content: center;
 }

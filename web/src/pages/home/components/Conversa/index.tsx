@@ -1,43 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./styles.css";
+import { Mensagem as MensagemModel } from "../../../../models/mensagem";
+import { UsuarioProps } from "../../../../models/usuario";
 import { EnviaMensagem } from "../EnviaMensagem";
 import { Mensagem } from "../Mensagem";
-import { Mensagem as MensagemModel } from "../../../../models/mensagem";
 
-export const Conversa: React.FC = () => {
+interface ConversaProps {
+  usuario: UsuarioProps;
+  mensagens: MensagemModel[];
+  enviarMensagem: (inputValue: string) => void;
+}
+
+export const Conversa: React.FC<ConversaProps> = ({ usuario, mensagens, enviarMensagem }: ConversaProps) => {
 
   const scrollMensagens = useRef<HTMLDivElement>({} as HTMLDivElement);
   const [inputMensagem, setInputMensagem] = useState<string>("");
-  const [mensagens, setMensagens] = useState<MensagemModel[]>([]);
 
   useEffect(() => {
-    rolaScrollParaFinal();
-    document.addEventListener("keypress", handleEnterEnviaMensagem);
-  }, []);
-
-  function rolaScrollParaFinal() {
-    const scroll = scrollMensagens.current; 
+    const scroll = scrollMensagens.current;
     scroll.scrollTop = scroll.scrollHeight;
-  }
-
-  function handleEnterEnviaMensagem(event: any) {
-    if(event.key === "Enter") {
-      enviaMensagem();
-    }
-  }
-
-  function enviaMensagem() {
-
-    if(inputMensagem.trim() === "") {
-      return;
-    }
-
-    console.log("Enviando mensagem");
-    setInputMensagem("");
-  }
+  }, [mensagens]);
 
   function handleEnviarMensagem() {
-    enviaMensagem();
+    enviarMensagem(inputMensagem);
+    setInputMensagem("");
   }
 
   function handleInputMensagemChange(mensagem: string) {
@@ -47,24 +33,12 @@ export const Conversa: React.FC = () => {
   return (
     <div className="chat-conversa-box">
       <div className="chat-mensagens-box" ref={scrollMensagens}>
-        <Mensagem nomeDoAutor="Davi" mensagem="Olá, tudo bem?" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="João" mensagem="Olá, eu me chamo João" isUsuarioLogado />
-        <Mensagem nomeDoAutor="João" mensagem="Olá, eu me chamo João" isUsuarioLogado />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Olá, tudo bem?" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="João" mensagem="Olá, eu me chamo João" isUsuarioLogado />
-        <Mensagem nomeDoAutor="João" mensagem="Olá, eu me chamo João" isUsuarioLogado />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
-        <Mensagem nomeDoAutor="Davi" mensagem="Aplicação websocket" />
+        <Mensagem nomeDoAutor="Administrador" mensagem="Bem vindo ao chat!" />
+        {
+          mensagens.map((mensagem, index) => (
+            <Mensagem key={index} nomeDoAutor={mensagem.autor.nome} mensagem={mensagem.mensagem} isUsuarioLogado={usuario.nome === mensagem.autor.nome} />
+          ))
+        }
       </div>
       <EnviaMensagem onClick={handleEnviarMensagem} value={inputMensagem} useState={handleInputMensagemChange} />
     </div>
