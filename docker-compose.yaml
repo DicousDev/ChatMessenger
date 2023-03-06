@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  back:
+    image: joaodicous/chatback:v1
+    ports:
+      - 8080:8080 
+  web:
+    image: joaodicous/chat:v1
+    ports:
+      - 5173:5173
+    depends_on:
+      - back
